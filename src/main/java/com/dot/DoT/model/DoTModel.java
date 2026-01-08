@@ -10,28 +10,29 @@ import com.dot.DoT.model.enums.Enums.EntryType;
 
 
 public class DoTModel {
- public class Entry{
-    private final Long id;
+    private Long id;
     private final Long userId;
+    private String content;
     private final EntryType tipo;
     private EntryStatus status;
-    private String conteudo;
     private final LocalDate dataReferencia;
     private final LocalDateTime criadoEm;
 
-    public Entry(
+    public DoTModel(
         Long id,
         Long userId,
+        String content,
         EntryType tipo,
-        String conteudo,
-        LocalDate dataReferencia
+        EntryStatus status,
+        LocalDate dataReferencia,
+        LocalDateTime criadoEm
     ){
-        this.id = Objects.requireNonNull(id);
+        this.id = id;
         this.userId = Objects.requireNonNull(userId);
+        this.content = Objects.requireNonNull(content);
         this.tipo = Objects.requireNonNull(tipo);
-        this.conteudo = Objects.requireNonNull(conteudo);
-        this.dataReferencia = Objects.requireNonNull(dataReferencia);
         this.status = EntryStatus.INCOMPLETO;
+        this.dataReferencia = Objects.requireNonNull(dataReferencia);
         this.criadoEm = LocalDateTime.now();
     }
 
@@ -48,7 +49,7 @@ public class DoTModel {
         }
         this.status = EntryStatus.CANCELADO;
     }
-    public void marcarComoMigrada(){
+    public void marcarComoMigrada(LocalDate newDate){
         if (status != EntryStatus.INCOMPLETO){
             throw new IllegalStateException("Apenas projetos incompletos podem ser migrados");
         }
@@ -71,8 +72,8 @@ public class DoTModel {
             return status;
         }
 
-        public String getConteudo() {
-            return conteudo;
+        public String getContent() {
+            return content;
         }
 
         public LocalDate getDataReferencia() {
@@ -84,6 +85,6 @@ public class DoTModel {
         }
 
 
-    }
+    
 }
 

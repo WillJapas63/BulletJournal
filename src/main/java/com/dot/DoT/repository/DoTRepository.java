@@ -7,7 +7,7 @@ import com.dot.DoT.model.DoTModel;
 
 public interface DoTRepository {
 
-    DoTModel save(DoTModel entry);
+    DoTModel save(DoTModel dotmodel);
 
     Optional<DoTModel> findById(Long id);
 
